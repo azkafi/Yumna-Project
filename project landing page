@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Project Landing Page</title>
+  <meta name="description" content="A modern, responsive landing page template with hero banner, features, gallery, and contact form.">
+  <!-- Google Fonts for modern typography -->
+  <link href="https://fonts.googleapis.com/css?family=Inter:400,600&display=swap" rel="stylesheet">
+  <style>
+    /* =========================
+       CSS RESET & BASE STYLES
+    ========================= */
+    html {
+      scroll-behavior: smooth; /* Enables smooth scrolling for anchor links */
+    }
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+      color: #1a202c;
+      background: #f8fafc;
+      line-height: 1.6;
+    }
+    a {
+      color: #2563eb;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    a:hover, a:focus {
+      color: #0f766e;
+      outline: none;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+    /* =========================
+       HERO SECTION
+    ========================= */
+    header.hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 60vh;
+      padding: 80px 24px 40px 24px;
+      background: linear-gradient(120deg, #667eea 0%, #764ba2 100%);
+      color: #fff;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 3.5rem);
+      margin: 0 0 16px 0;
+      font-weight: 600;
+      letter-spacing: -1px;
+      line-height: 1.1;
+      text-shadow: 0 2px 16px rgba(0,0,0,0.08);
+    }
+    .hero .subhead {
+      font-size: 1.25rem;
+      color: #e0e7ff;
+      margin-bottom: 32px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .hero .cta-btn {
+      display: inline-block;
+      background: #0f766e;
+      color: #fff;
+      font-weight: 600;
+      padding: 14px 32px;
+      border-radius: 999px;
+      font-size: 1.1rem;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      transition: background 0.2s, transform 0.2s;
+    }
+    .hero .cta-btn:hover, .hero .cta-btn:focus {
+      background: #2563eb;
+      transform: translateY(-2px) scale(1.03);
+      outline: none;
+    }
+    /* Decorative SVG background */
+    .hero-bg-svg {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.18;
+    }
+    .hero > *:not(.hero-bg-svg) {
+      position: relative;
+      z-index: 1;
+    }
+    /* =========================
+       NAVIGATION (Optional)
+    ========================= */
+    nav {
+      width: 100%;
+      background: transparent;
+      position: absolute;
+      top: 0; left: 0;
+      display: flex;
+      justify-content: flex-end;
+      padding: 24px 32px 0 0;
+      z-index: 10;
+    }
+    nav a {
+      color: #fff;
+      margin-left: 32px;
+      font-weight: 500;
+      font-size: 1rem;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+    nav a:focus {
+      outline: 2px solid #fff;
+      outline-offset: 2px;
+    }
+    /* =========================
+       PROJECT DESCRIPTION
+    ========================= */
+    section.description {
+      background: #fff;
+      padding: 48px 24px 32px 24px;
+      max-width: 900px;
+      margin: -40px auto 0 auto;
+      border-radius: 16px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.04);
+      position: relative;
+      z-index: 2;
+    }
+    .description h2 {
+      font-size: 2rem;
+      margin-bottom: 12px;
+      color: #0f172a;
+    }
+    .description p {
+      font-size: 1.15rem;
+      margin-bottom: 0;
+      color: #334155;
+    }
+    /* =========================
+       FEATURES GRID
+    ========================= */
+    section.features {
+      padding: 56px 24px 32px 24px;
+      background: #f1f5f9;
+    }
+    .features-grid {
+      display: grid;
+      gap: 32px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .feature-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 32px 24px;
+      box-shadow: 0 1px 0 rgba(15,23,42,0.06);
+      border: 1px solid #e2e8f0;
+      text-align: left;
+      transition: transform 0.18s, box-shadow 0.18s;
+      position: relative;
+    }
+    .feature-card:hover, .feature-card:focus-within {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 8px 32px rgba(15,23,42,0.10);
+      outline: none;
+    }
+    .feature-icon {
+      font-size: 2.5rem;
+      margin-bottom: 16px;
+      color: #2563eb;
+      display: inline-block;
+    }
+    .feature-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #0f172a;
+    }
+    .feature-desc {
+      color: #475569;
+      font-size: 1rem;
+    }
+    /* =========================
+       IMAGE GALLERY (SLIDER)
+    ========================= */
+    section.gallery {
+      padding: 56px 24px 32px 24px;
+      background: #fff;
+    }
+    .gallery-container {
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .gallery-slider {
+      display: flex;
+      overflow: hidden;
+      border-radius: 16px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+      background: #f8fafc;
+      min-height: 320px;
+      align-items: center;
+      position: relative;
+    }
+    .gallery-slide {
+      min-width: 100%;
+      transition: transform 0.5s cubic-bezier(.4,0,.2,1);
+      opacity: 0;
+      pointer-events: none;
+      position: absolute;
+      left: 0; top: 0;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .gallery-slide.active {
+      opacity: 1;
+      pointer-events: auto;
+      position: relative;
+      z-index: 2;
+      transform: translateX(0);
+      animation: fadeIn 0.7s;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.98);}
+      to { opacity: 1; transform: scale(1);}
+    }
+    .gallery-slide img {
+      border-radius: 12px;
+      max-height: 320px;
+      object-fit: cover;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      margin-bottom: 16px;
+    }
+    .gallery-caption {
+      font-size: 1rem;
+      color: #475569;
+      background: rgba(255,255,255,0.92);
+      padding: 8px 18px;
+      border-radius: 8px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+      margin-bottom: 8px;
+      text-align: center;
+      max-width: 90%;
+    }
+    /* Gallery Controls */
+    .gallery-controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 18px;
+      gap: 16px;
+    }
+    .gallery-btn {
+      background: #2563eb;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      outline: none;
+    }
+    .gallery-btn:focus, .gallery-btn:hover {
+      background: #0f766e;
+      transform: scale(1.07);
+      outline: 2px solid #2563eb;
+      outline-offset: 2px;
+    }
+    .gallery-dots {
+      display: flex;
+      gap: 8px;
+      margin-left: 16px;
+    }
+    .gallery-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #cbd5e1;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s;
+      outline: none;
+    }
+    .gallery-dot.active, .gallery-dot:focus {
+      background: #2563eb;
+      outline: 2px solid #2563eb;
+      outline-offset: 2px;
+    }
+    /* Lightbox Modal */
+    .lightbox-modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0; top: 0; width: 100vw; height: 100vh;
+      background: rgba(30,41,59,0.92);
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.25s;
+    }
+    .lightbox-modal.active {
+      display: flex;
+      animation: fadeIn 0.3s;
+    }
+    .lightbox-content {
+      position: relative;
+      background: #fff;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.18);
+      max-width: 90vw;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .lightbox-content img {
+      max-width: 80vw;
+      max-height: 60vh;
+      border-radius: 12px;
+      margin-bottom: 16px;
+      object-fit: contain;
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 12px; right: 12px;
+      background: #2563eb;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 36px; height: 36px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+      outline: none;
+    }
+    .lightbox-close:focus, .lightbox-close:hover {
+      background: #0f766e;
+      outline: 2px solid #2563eb;
+      outline-offset: 2px;
+    }
+    /* =========================
+       CONTACT FORM
+    ========================= */
+    section.contact {
+      background: #f1f5f9;
+      padding: 56px 24px 32px 24px;
+    }
+    .contact-container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.04);
+      padding: 40px 24px 32px 24px;
+    }
+    .contact-container h2 {
+      font-size: 2rem;
+      margin-bottom: 16px;
+      color: #0f172a;
+    }
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+    }
+    .form-group label {
+      font-weight: 500;
+      color: #334155;
+      font-size: 1rem;
+    }
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-family: inherit;
+      transition: border 0.2s, box-shadow 0.2s;
+      background: #f8fafc;
+      color: #1e293b;
+      resize: none;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 2px #2563eb33;
+      outline: none;
+    }
+    .form-error {
+      color: #e11d48;
+      font-size: 0.98rem;
+      margin-top: 2px;
+      min-height: 18px;
+    }
+    .submit-btn {
+      background: #2563eb;
+      color: #fff;
+      font-weight: 600;
+      padding: 14px 32px;
+      border-radius: 999px;
+      font-size: 1.1rem;
+      border: none;
+      cursor: pointer;
+      align-self: flex-start;
+      transition: background 0.2s, transform 0.2s;
+      margin-top: 8px;
+    }
+    .submit-btn:hover, .submit-btn:focus {
+      background: #0f766e;
+      transform: scale(1.04);
+      outline: none;
+    }
+    .form-success {
+      color: #0f766e;
+      font-size: 1.1rem;
+      margin-top: 12px;
+      font-weight: 600;
+    }
+    /* =========================
+       FOOTER
+    ========================= */
+    footer {
+      background: #0f172a;
+      color: #fff;
+      text-align: center;
+      padding: 32px 12px 24px 12px;
+      font-size: 1rem;
+      letter-spacing: 0.01em;
+    }
+    /* =========================
+       RESPONSIVE DESIGN
+    ========================= */
+    @media (max-width: 900px) {
+      .gallery-container, .description, .contact-container {
+        max-width: 98vw;
+      }
+    }
+    @media (max-width: 600px) {
+      .hero {
+        padding: 56px 8px 24px 8px;
+      }
+      .description, .contact-container {
+        padding: 24px 8px 16px 8px;
+      }
+      .features {
+        padding: 32px 8px 16px 8px;
+      }
+      .gallery {
+        padding: 32px 8px 16px 8px;
+      }
+      .contact {
+        padding: 32px 8px 16px 8px;
+      }
+      .feature-card {
+        padding: 20px 10px;
+      }
+      .gallery-slider {
+        min-height: 180px;
+      }
+      .gallery-slide img {
+        max-height: 160px;
+      }
+      .lightbox-content img {
+        max-width: 96vw;
+        max-height: 40vh;
+      }
+    }
+    /* Accessibility: Focus indicators for all interactive elements */
+    .cta-btn:focus, .gallery-btn:focus, .gallery-dot:focus, .submit-btn:focus, .lightbox-close:focus {
+      outline: 2.5px solid #2563eb;
+      outline-offset: 2px;
+    }
+    /* Reduced motion for accessibility */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        transition: none !important;
+        animation: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Optional Navigation -->
+  <nav aria-label="Main navigation">
+    <a href="#features">Features</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <!-- HERO SECTION -->
+  <header class="hero" id="hero">
+    <!-- Decorative SVG background for visual interest -->
+    <svg class="hero-bg-svg" viewBox="0 0 1440 600" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <linearGradient id="bg-gradient" x1="0" y1="0" x2="1440" y2="600" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#667eea"/>
+          <stop offset="1" stop-color="#764ba2"/>
+        </linearGradient>
+      </defs>
+      <ellipse cx="720" cy="300" rx="900" ry="320" fill="url(#bg-gradient)" opacity="0.7"/>
+    </svg>
+    <h1>Modern Project Landing Page</h1>
+    <p class="subhead">A fully responsive, accessible, and visually engaging landing page template. Built with HTML, CSS, and JavaScript—ready for your next project launch.</p>
+    <a href="#contact" class="cta-btn">Contact Us</a>
+  </header>
+  <!-- PROJECT DESCRIPTION -->
+  <section class="description" aria-labelledby="desc-title">
+    <h2 id="desc-title">About This Project</h2>
+    <p>
+      This landing page template demonstrates best practices in modern web design: a striking hero section, clear project description, feature highlights, a dynamic image gallery, and a robust contact form. Every section is crafted for accessibility, performance, and ease of customization. Use it as a foundation for product launches, portfolios, or SaaS marketing.
+    </p>
+  </section>
+  <!-- FEATURES GRID -->
+  <section class="features" id="features" aria-labelledby="features-title">
+    <h2 id="features-title" style="text-align:center; margin-bottom:32px;">Key Features</h2>
+    <div class="features-grid">
+      <!-- Feature Card 1 -->
+      <div class="feature-card" tabindex="0">
+        <span class="feature-icon" aria-hidden="true">⚡</span>
+        <div class="feature-title">Lightning Fast</div>
+        <div class="feature-desc">Optimized for speed and performance, ensuring instant load times and smooth interactions across all devices.</div>
+      </div>
+      <!-- Feature Card 2 -->
+      <div class="feature-card" tabindex="0">
+        <span class="feature-icon" aria-hidden="true">📱</span>
+        <div class="feature-title">Fully Responsive</div>
+        <div class="feature-desc">Adapts seamlessly to mobile, tablet, and desktop screens using CSS Grid and Flexbox layouts.</div>
+      </div>
+      <!-- Feature Card 3 -->
+      <div class="feature-card" tabindex="0">
+        <span class="feature-icon" aria-hidden="true">🛡️</span>
+        <div class="feature-title">Accessible by Design</div>
+        <div class="feature-desc">Built to WCAG standards with semantic HTML, keyboard navigation, and high-contrast visuals.</div>
+      </div>
+      <!-- Feature Card 4 -->
+      <div class="feature-card" tabindex="0">
+        <span class="feature-icon" aria-hidden="true">🎨</span>
+        <div class="feature-title">Modern Aesthetics</div>
+        <div class="feature-desc">Clean, minimalist design with bold typography, engaging colors, and subtle micro-interactions.</div>
+      </div>
+      <!-- Feature Card 5 -->
+      <div class="feature-card" tabindex="0">
+        <span class="feature-icon" aria-hidden="true">🔒</span>
+        <div class="feature-title">Secure & Scalable</div>
+        <div class="feature-desc">Ready for integration with static form services, analytics, and scalable hosting platforms.</div>
+      </div>
+      <!-- Feature Card 6 -->
+      <div class="feature-card" tabindex="0">
+        <span class="feature-icon" aria-hidden="true">🖼️</span>
+        <div class="feature-title">Dynamic Gallery</div>
+        <div class="feature-desc">Interactive image slider with lightbox modal for immersive visual storytelling.</div>
+      </div>
+    </div>
+  </section>
+  <!-- IMAGE GALLERY (SLIDER) -->
+  <section class="gallery" id="gallery" aria-labelledby="gallery-title">
+    <h2 id="gallery-title" style="text-align:center; margin-bottom:32px;">Project Gallery</h2>
+    <div class="gallery-container">
+      <div class="gallery-slider" aria-live="polite" aria-label="Image gallery slider">
+        <!-- Slides (use placeholder images from Unsplash Source) -->
+        <div class="gallery-slide active" data-index="0" tabindex="0">
+          <img src="https://source.unsplash.com/random/800x400?technology,1" alt="Modern dashboard interface" />
+          <div class="gallery-caption">Modern dashboard interface for analytics.</div>
+        </div>
+        <div class="gallery-slide" data-index="1" tabindex="0">
+          <img src="https://source.unsplash.com/random/800x400?teamwork,2" alt="Team collaborating on project" />
+          <div class="gallery-caption">Team collaboration in action.</div>
+        </div>
+        <div class="gallery-slide" data-index="2" tabindex="0">
+          <img src="https://source.unsplash.com/random/800x400?design,3" alt="Creative design process" />
+          <div class="gallery-caption">Creative design process and prototyping.</div>
+        </div>
+        <div class="gallery-slide" data-index="3" tabindex="0">
+          <img src="https://source.unsplash.com/random/800x400?code,4" alt="Clean code editor" />
+          <div class="gallery-caption">Clean, maintainable codebase.</div>
+        </div>
+      </div>
+      <!-- Gallery Controls -->
+      <div class="gallery-controls" aria-label="Gallery navigation controls">
+        <button class="gallery-btn" id="gallery-prev" aria-label="Previous image" tabindex="0">&larr;</button>
+        <div class="gallery-dots" role="tablist" aria-label="Gallery slide indicators">
+          <button class="gallery-dot active" aria-label="Go to slide 1" aria-selected="true" tabindex="0"></button>
+          <button class="gallery-dot" aria-label="Go to slide 2" aria-selected="false" tabindex="0"></button>
+          <button class="gallery-dot" aria-label="Go to slide 3" aria-selected="false" tabindex="0"></button>
+          <button class="gallery-dot" aria-label="Go to slide 4" aria-selected="false" tabindex="0"></button>
+        </div>
+        <button class="gallery-btn" id="gallery-next" aria-label="Next image" tabindex="0">&rarr;</button>
+      </div>
+    </div>
+    <!-- Lightbox Modal for Gallery -->
+    <div class="lightbox-modal" id="lightbox-modal" role="dialog" aria-modal="true" aria-label="Image lightbox">
+      <div class="lightbox-content">
+        <button class="lightbox-close" id="lightbox-close" aria-label="Close lightbox">&times;</button>
+        <img src="" alt="" id="lightbox-img" />
+        <div class="gallery-caption" id="lightbox-caption"></div>
+      </div>
+    </div>
+  </section>
+  <!-- CONTACT FORM -->
+  <section class="contact" id="contact" aria-labelledby="contact-title">
+    <div class="contact-container">
+      <h2 id="contact-title">Contact Us</h2>
+      <form class="contact-form" id="contactForm" autocomplete="off" novalidate>
+        <div class="form-group">
+          <label for="name">Name <span aria-hidden="true" style="color:#e11d48;">*</span></label>
+          <input type="text" id="name" name="name" required minlength="2" maxlength="64" autocomplete="name" aria-required="true" />
+          <div class="form-error" id="nameError" aria-live="polite"></div>
+        </div>
+        <div class="form-group">
+          <label for="email">Email <span aria-hidden="true" style="color:#e11d48;">*</span></label>
+          <input type="email" id="email" name="email" required maxlength="128" autocomplete="email" aria-required="true" />
+          <div class="form-error" id="emailError" aria-live="polite"></div>
+        </div>
+        <div class="form-group">
+          <label for="message">Message <span aria-hidden="true" style="color:#e11d48;">*</span></label>
+          <textarea id="message" name="message" rows="5" required minlength="10" maxlength="1000" aria-required="true"></textarea>
+          <div class="form-error" id="messageError" aria-live="polite"></div>
+        </div>
+        <button type="submit" class="submit-btn">Send Message</button>
+        <div class="form-success" id="formSuccess" aria-live="polite"></div>
+      </form>
+    </div>
+  </section>
+  <!-- FOOTER -->
+  <footer>
+    &copy; 2025 Modern Project Landing Page. Built with <span aria-label="love" role="img">❤️</span> for the web.
+  </footer>
+  <!-- =========================
+       JAVASCRIPT FOR INTERACTIVITY
+  ========================= -->
+  <script>
+    /* =========================
+       SMOOTH SCROLL FOR NAV LINKS
+    ========================= */
+    document.querySelectorAll('nav a[href^="#"]').forEach(link => {
+      link.addEventListener('click', function(e) {
+        const targetId = this.getAttribute('href').slice(1);
+        const target = document.getElementById(targetId);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth' });
+          target.setAttribute('tabindex', '-1');
+          target.focus({ preventScroll: true });
+        }
+      });
+    });
+
+    /* =========================
+       GALLERY SLIDER LOGIC
+    ========================= */
+    const slides = document.querySelectorAll('.gallery-slide');
+    const dots = document.querySelectorAll('.gallery-dot');
+    const prevBtn = document.getElementById('gallery-prev');
+    const nextBtn = document.getElementById('gallery-next');
+    let currentSlide = 0;
+    let galleryInterval = null;
+    const SLIDE_INTERVAL = 7000; // ms
+
+    function showSlide(index, focus = false) {
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === index);
+        slide.setAttribute('aria-hidden', i !== index);
+        if (focus && i === index) slide.focus();
+      });
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === index);
+        dot.setAttribute('aria-selected', i === index ? 'true' : 'false');
+      });
+      currentSlide = index;
+    }
+
+    function nextSlide() {
+      showSlide((currentSlide + 1) % slides.length);
+    }
+    function prevSlide() {
+      showSlide((currentSlide - 1 + slides.length) % slides.length);
+    }
+    // Auto-play
+    function startGalleryAuto() {
+      if (galleryInterval) clearInterval(galleryInterval);
+      galleryInterval = setInterval(nextSlide, SLIDE_INTERVAL);
+    }
+    function stopGalleryAuto() {
+      if (galleryInterval) clearInterval(galleryInterval);
+    }
+    // Controls
+    nextBtn.addEventListener('click', () => { nextSlide(); startGalleryAuto(); });
+    prevBtn.addEventListener('click', () => { prevSlide(); startGalleryAuto(); });
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', () => { showSlide(i, true); startGalleryAuto(); });
+      dot.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          showSlide(i, true);
+          startGalleryAuto();
+        }
+      });
+    });
+    // Keyboard navigation for slider
+    document.querySelector('.gallery-slider').addEventListener('keydown', e => {
+      if (e.key === 'ArrowLeft') { prevSlide(); startGalleryAuto(); }
+      if (e.key === 'ArrowRight') { nextSlide(); startGalleryAuto(); }
+    });
+    // Swipe support for mobile
+    let touchStartX = null;
+    document.querySelector('.gallery-slider').addEventListener('touchstart', e => {
+      touchStartX = e.touches[0].clientX;
+    });
+    document.querySelector('.gallery-slider').addEventListener('touchend', e => {
+      if (touchStartX === null) return;
+      const touchEndX = e.changedTouches[0].clientX;
+      if (touchEndX - touchStartX > 40) { prevSlide(); startGalleryAuto(); }
+      else if (touchStartX - touchEndX > 40) { nextSlide(); startGalleryAuto(); }
+      touchStartX = null;
+    });
+    // Pause auto-play on hover/focus
+    document.querySelector('.gallery-slider').addEventListener('mouseenter', stopGalleryAuto);
+    document.querySelector('.gallery-slider').addEventListener('mouseleave', startGalleryAuto);
+    document.querySelector('.gallery-slider').addEventListener('focusin', stopGalleryAuto);
+    document.querySelector('.gallery-slider').addEventListener('focusout', startGalleryAuto);
+
+    // Initialize
+    showSlide(0);
+    startGalleryAuto();
+
+    /* =========================
+       LIGHTBOX MODAL LOGIC
+    ========================= */
+    const lightboxModal = document.getElementById('lightbox-modal');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxCaption = document.getElementById('lightbox-caption');
+    const lightboxClose = document.getElementById('lightbox-close');
+    slides.forEach((slide, i) => {
+      slide.addEventListener('click', () => openLightbox(i));
+      slide.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') openLightbox(i);
+      });
+    });
+    function openLightbox(index) {
+      const img = slides[index].querySelector('img');
+      lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt;
+      lightboxCaption.textContent = slides[index].querySelector('.gallery-caption').textContent;
+      lightboxModal.classList.add('active');
+      lightboxClose.focus();
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      lightboxModal.classList.remove('active');
+      lightboxImg.src = '';
+      lightboxImg.alt = '';
+      document.body.style.overflow = '';
+    }
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightboxModal.addEventListener('click', e => {
+      if (e.target === lightboxModal) closeLightbox();
+    });
+    // Keyboard navigation for lightbox
+    lightboxModal.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') prevLightbox();
+      if (e.key === 'ArrowRight') nextLightbox();
+    });
+    function prevLightbox() {
+      let idx = Array.from(slides).findIndex(slide => slide.querySelector('img').src === lightboxImg.src);
+      idx = (idx - 1 + slides.length) % slides.length;
+      openLightbox(idx);
+    }
+    function nextLightbox() {
+      let idx = Array.from(slides).findIndex(slide => slide.querySelector('img').src === lightboxImg.src);
+      idx = (idx + 1) % slides.length;
+      openLightbox(idx);
+    }
+
+    /* =========================
+       CONTACT FORM VALIDATION
+    ========================= */
+    const contactForm = document.getElementById('contactForm');
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const messageInput = document.getElementById('message');
+    const nameError = document.getElementById('nameError');
+    const emailError = document.getElementById('emailError');
+    const messageError = document.getElementById('messageError');
+    const formSuccess = document.getElementById('formSuccess');
+
+    function validateEmail(email) {
+      // Simple regex for demonstration
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+    function validateForm() {
+      let valid = true;
+      nameError.textContent = '';
+      emailError.textContent = '';
+      messageError.textContent = '';
+      formSuccess.textContent = '';
+      if (nameInput.value.trim().length < 2) {
+        nameError.textContent = 'Please enter your name (at least 2 characters).';
+        valid = false;
+      }
+      if (!validateEmail(emailInput.value.trim())) {
+        emailError.textContent = 'Please enter a valid email address.';
+        valid = false;
+      }
+      if (messageInput.value.trim().length < 10) {
+        messageError.textContent = 'Message should be at least 10 characters.';
+        valid = false;
+      }
+      return valid;
+    }
+    contactForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      if (validateForm()) {
+        // Simulate AJAX submission (replace with real endpoint or static form service)
+        setTimeout(() => {
+          formSuccess.textContent = 'Thank you! Your message has been sent.';
+          contactForm.reset();
+        }, 900);
+      }
+    });
+    // Real-time validation feedback
+    [nameInput, emailInput, messageInput].forEach(input => {
+      input.addEventListener('input', validateForm);
+    });
+
+    /* =========================
+       ACCESSIBILITY: FOCUS MANAGEMENT
+    ========================= */
+    // Trap focus inside lightbox when open
+    lightboxModal.addEventListener('keydown', function(e) {
+      if (!lightboxModal.classList.contains('active')) return;
+      const focusable = lightboxModal.querySelectorAll('button, [tabindex]:not([tabindex="-1"])');
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.key === 'Tab') {
+        if (e.shiftKey) {
+          if (document.activeElement === first) {
+            e.preventDefault();
+            last.focus();
+          }
+        } else {
+          if (document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
